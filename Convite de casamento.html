@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Convite de casamento</title>
+<link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
+<link href="[https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@400;500;600&display=swap](https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@400;500;600&display=swap)" rel="stylesheet">
+<style>
+
+:root{--paper:#fbf8f2;--ink:#4a3f3a;--soft:#6e625c;--gold:#b08d4c;--gold-d:#9a7634;--rose:#c98f89;--sage:#7d8f74;
+--script:"Great Vibes","Snell Roundhand","Brush Script MT",cursive;--serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;--sans:"Montserrat","Helvetica Neue",Arial,sans-serif;
+box-sizing:border-box;color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html,body{height:100%;margin:0; overflow: hidden;}
+html::-webkit-scrollbar{width:0;height:0; display: none;}
+body{background:#e6ddd0;color:var(--ink);font-family:var(--serif);overflow:hidden}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+#app{position:relative;max-width:430px;height:100%;margin:0 auto;background:var(--paper);overflow:hidden}
+.cap{font:500 .66rem/1.4 var(--sans);letter-spacing:.3em;text-transform:uppercase}
+
+/* ===== página ===== */
+#page{position:absolute;inset:0;z-index:10;overflow-y:auto;overflow-x:hidden;scroll-behavior:smooth;
+scrollbar-width:none;-ms-overflow-style:none;text-align:center;
+background:radial-gradient(120% 50% at 50% 0,#fffdf9,var(--paper) 70%)}
+#page::-webkit-scrollbar{display:none;width:0;height:0}
+#app:not(.opened) #page{overflow:hidden}
+.rv{opacity:0;transform:translateY(26px);transition:opacity 1.2s ease,transform 1.3s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--i,0)*.15s)}
+.in .rv{opacity:1;transform:none}
+#app.opened .hero .rv{opacity:1;transform:none;transition-delay:calc(1.5s + var(--i,0)*.2s)}
+
+.hero{padding:calc(34px + env(safe-area-inset-top,0px)) 26px 30px}
+.hero .eb{color:var(--rose);margin:0}
+.archw{position:relative;width:78%;margin:24px auto 0}
+.archw::before{content:"";position:absolute;inset:-9px -9px 0 -9px;border:1px solid var(--gold);border-bottom:0;border-radius:999px 999px 0 0;pointer-events:none}
+.arch{position:relative;aspect-ratio:3/4;border-radius:999px 999px 0 0;overflow:hidden;background:#e9dccd}
+.arch .ph{position:absolute;inset:0;background:var(--photo) 50% 8%/cover no-repeat}
+.arch video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.4s}
+.arch video.on{opacity:1}
+.gl{position:absolute;left:50%;bottom:-40px;width:122%;translate:-50% 0;z-index:3;pointer-events:none;overflow:visible}
+.nm{margin:76px 0 0;font:400 clamp(3.8rem,19vw,5rem)/1.02 var(--script);color:var(--ink)}
+.nm .amp{display:block;font-size:.5em;color:var(--gold);margin:-.05em 0}
+.nm span{display:block}
+.dt{margin:20px 0 0;color:var(--gold-d)}
+.orn{display:block;width:150px;margin:16px auto 0}
+.cue{margin-top:22px;background:none;border:0;cursor:pointer;color:var(--rose);animation:bob 2.4s ease-in-out infinite}
+.cue svg{width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
+@keyframes bob{50%{transform:translateY(7px)}}
+
+.sec{padding:52px 28px 6px}
+.dv{display:block;width:190px;margin:0 auto 18px}
+.lb{margin:0 0 6px;color:var(--rose)}
+h2{margin:0 0 14px;font:400 3rem/1.1 var(--script);color:var(--gold-d)}
+.sec p{margin:0 0 12px;font-size:1.25rem;line-height:1.6;color:var(--soft)}
+.big{font:italic 400 1.6rem/1.35 var(--serif)!important;color:var(--ink)!important}
+.cd{display:flex;justify-content:center;gap:24px;margin-top:26px}
+.cd div{position:relative}
+.cd div+div::before{content:"";position:absolute;left:-14px;top:18px;width:4px;height:4px;transform:rotate(45deg);background:var(--gold)}
+.cd b{display:block;font:500 2.6rem/1 var(--serif);color:var(--ink);font-variant-numeric:tabular-nums}
+.cd span{color:var(--soft)}
+.tl{list-style:none;margin:14px 0 0;padding:0}
+.tl li{padding:0 0 4px}
+.tl li::after{content:"";display:block;width:1px;height:30px;background:var(--gold);margin:18px auto 14px;opacity:.6}
+.tl li:last-child::after{display:none}
+.tl time{display:block;font:italic 500 2rem/1 var(--serif);color:var(--gold-d)}
+.tl strong{display:block;margin-top:6px;font:500 .72rem var(--sans);letter-spacing:.26em;text-transform:uppercase}
+.tl small{display:block;margin-top:4px;font:italic 400 1.1rem var(--serif);color:var(--soft)}
+
+/* galeria em molduras */
+.gal{display:grid;grid-template-columns:1fr 1fr;gap:26px 18px;margin:30px 6px 10px}
+.gal button{display:block;width:100%;padding:0;border:0;overflow:hidden;background:#eadfd2;cursor:zoom-in;outline:1px solid var(--gold);outline-offset:6px;opacity:0;transform:translateY(34px);transition:opacity 1.1s ease,transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.gal button.in{opacity:1;transform:none}
+.gal button.dflt{cursor:default}
+.gal button:nth-child(1){grid-column:1/-1;width:74%;justify-self:center;aspect-ratio:3/4;border-radius:50%}
+.gal button:nth-child(2){aspect-ratio:3/4;border-radius:999px 999px 0 0}
+.gal button:nth-child(3){aspect-ratio:1;border-radius:50%;margin-top:34px}
+.gal button:nth-child(4){grid-column:1/-1;aspect-ratio:4/3;border-radius:50%;width:84%;justify-self:center}
+.gal button:nth-child(n+5){aspect-ratio:3/4;border-radius:999px 999px 0 0}
+.gal img,.gal .ph{display:block;width:100%;height:100%;object-fit:cover}
+.gal .ph{background:var(--photo) no-repeat}
+.lightbox{position:absolute;inset:0;z-index:80;background:rgba(40,28,24,.94);display:grid;place-items:center;opacity:0;transition:opacity .35s}
+.lightbox[hidden],.lbtn[hidden]{display:none}
+.lightbox.on{opacity:1}
+.lightbox img{max-width:92%;max-height:82dvh;object-fit:contain;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.lbtn{position:absolute;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.5);background:rgba(255,255,255,.1);color:#fff;font:300 1.6rem/1 var(--sans);cursor:pointer;display:grid;place-items:center}
+.lbtn.x{top:calc(env(safe-area-inset-top,0px) + 14px);right:14px}
+.lbtn.pv,.lbtn.nx{top:50%;translate:0 -50%}.lbtn.pv{left:10px}.lbtn.nx{right:10px}
+
+.venue{font:400 3rem/1.05 var(--script);color:var(--gold-d);margin:0 0 6px}
+.btn{display:block;width:100%;padding:15px 10px;border:1px solid var(--gold);border-radius:999px;background:transparent;color:var(--gold-d);font:600 .66rem var(--sans);letter-spacing:.22em;text-transform:uppercase;cursor:pointer;transition:background .35s,color .35s}
+.btn:hover{background:var(--gold);color:#fff}
+.btn.fill{background:linear-gradient(135deg,#c4a15f,#a5822f);border-color:transparent;color:#fff}
+.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:18px 0 26px}
+.row2{display:grid;gap:8px;margin:12px 0 18px}
+.sub{margin:8px 0 0!important;font:600 .64rem var(--sans)!important;letter-spacing:.3em;text-transform:uppercase;color:var(--rose)!important}
+.form{display:grid;gap:18px;margin-top:10px;text-align:left}
+label{display:grid;gap:2px}
+label .cap{color:var(--rose);font-size:.6rem}
+input,select,textarea{background:transparent;border:0;border-bottom:1px solid rgba(176,141,76,.6);border-radius:0;padding:8px 0;font:400 1.25rem var(--serif);color:var(--ink)}
+textarea{min-height:64px;resize:vertical}
+.ch{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ch .btn.on{background:var(--gold);color:#fff}
+.note{min-height:1.4em;margin:0!important;font:italic 1.1rem var(--serif)!important;color:var(--rose)!important;text-align:center}
+footer.sec{padding:30px 26px calc(46px + env(safe-area-inset-bottom,0px));overflow:hidden}
+footer .gl2{width:120%;margin:0 -10% 10px;display:block}
+footer .nm{margin:0;font-size:3.6rem}
+.replay{margin-top:22px;background:none;border:0;color:var(--soft);font:italic 1.05rem var(--serif);text-decoration:underline;cursor:pointer}
+
+.snd{position:absolute;z-index:70;top:calc(env(safe-area-inset-top,0px) + 14px);right:14px;width:42px;height:42px;border-radius:50%;border:1px solid var(--gold);background:rgba(251,248,242,.85);display:none;place-items:center;cursor:pointer;opacity:0;transition:opacity 1s ease 2.4s}
+#app.opened .snd.show{display:grid;opacity:1}
+.snd svg{width:20px;height:20px;stroke:var(--gold-d);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.snd .x{display:none}.snd.off .w{display:none}.snd.off .x{display:block}
+
+/* pétalas */
+#petals{position:absolute;inset:0;z-index:40;pointer-events:none;overflow:hidden;opacity:0;transition:opacity 2s ease 1.6s}
+#app.opened #petals{opacity:1}
+.pt{position:absolute;top:-30px;left:var(--x);width:var(--s);height:calc(var(--s)*1.35);background:linear-gradient(135deg,#f6dcd6,#e2a8a0);border-radius:150% 0 150% 0;opacity:0;animation:fall var(--d) linear var(--dl) infinite}
+@keyframes fall{0%{opacity:0;transform:translate3d(0,-4vh,0) rotate(0)}10%{opacity:.85}88%{opacity:.7}100%{opacity:0;transform:translate3d(var(--dx),108vh,0) rotate(var(--r))}}
+
+/* ===== portas do jardim ===== */
+#cover{position:absolute;inset:0;z-index:50;perspective:1700px;perspective-origin:50% 42%}
+#cover.gone{visibility:hidden;pointer-events:none}
+.glow{position:absolute;left:50%;top:46%;width:170%;aspect-ratio:1;translate:-50% -50%;background:radial-gradient(circle,rgba(255,250,236,.98),rgba(255,244,220,0) 60%);opacity:0}
+#cover.open .glow{animation:bloom 2.8s ease .4s forwards}
+@keyframes bloom{0%{opacity:0;transform:scale(.3)}38%{opacity:1}100%{opacity:0;transform:scale(1.15)}}
+.door{position:absolute;top:0;bottom:0;width:50%;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:transform 2.4s cubic-bezier(.62,0,.22,1);will-change:transform}
+.door.l{left:0;transform-origin:0 50%}
+.door.r{right:0;transform-origin:100% 50%}
+#cover.open .door.l{transform:rotateY(-106deg);transition:transform 2.4s cubic-bezier(.62,0,.22,1) .45s}
+#cover.open .door.r{transform:rotateY(106deg);transition:transform 2.4s cubic-bezier(.62,0,.22,1) .45s}
+.door::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(90,60,30,0),rgba(90,60,30,.4));opacity:0;transition:opacity 2s ease}
+.door.r::after{background:linear-gradient(270deg,rgba(90,60,30,0),rgba(90,60,30,.4))}
+#cover.open .door::after{opacity:1}
+.door svg{position:absolute;top:0;height:100%;width:200%}
+.door.l svg{left:0}.door.r svg{left:-100%}
+.ct{position:absolute;left:0;right:0;top:35%;z-index:5;text-align:center;transition:opacity .6s ease,transform .8s ease;pointer-events:none}
+#cover.open .ct{opacity:0;transform:translateY(-14px)}
+.ct .cap{color:var(--rose)}
+.ct .nm{margin:6px 0 0;font-size:clamp(3.6rem,18vw,4.8rem)}
+.ct .dt{margin:10px 0 0}
+.seal{position:absolute;left:50%;top:67%;z-index:6;translate:-50% -50%;width:104px;height:104px;padding:0;border:0;background:none;cursor:pointer;filter:drop-shadow(0 7px 8px rgba(70,45,5,.45));transition:transform .5s cubic-bezier(.34,1.4,.64,1)}
+.seal:hover{transform:scale(1.05)}
+.seal:active{transform:scale(.94)}
+.seal::after{content:"";position:absolute;inset:-7px;border-radius:50%;border:1px solid rgba(176,141,76,.75);animation:ping 2.6s ease-out infinite;pointer-events:none}
+.sh{position:absolute;top:0;bottom:0;width:50%;overflow:hidden;transition:transform .8s cubic-bezier(.3,.7,.2,1),opacity .7s ease .1s}
+.sh.l{left:0;transform-origin:100% 60%}.sh.r{right:0;transform-origin:0 60%}
+.sh svg{position:absolute;top:0;width:104px;height:104px}
+.sh.l svg{left:0}.sh.r svg{left:-52px}
+#cover.open .sh.l{transform:translateX(-16px) rotate(-14deg);opacity:0}
+#cover.open .sh.r{transform:translateX(16px) rotate(14deg);opacity:0}
+#cover.open .seal{pointer-events:none}
+#cover.open .seal::after{animation:none;opacity:0}
+@keyframes ping{from{transform:scale(.9);opacity:.8}to{transform:scale(1.5);opacity:0}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01s!important;transition-duration:.01s!important;transition-delay:0s!important;scroll-behavior:auto!important}.pt{display:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs id="defs">
+  <linearGradient id="ivg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffdf8"/><stop offset="1" stop-color="#f1e6d5"/></linearGradient>
+  <filter id="lin"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2"/><feColorMatrix values="0 0 0 0 .5 0 0 0 0 .4 0 0 0 0 .3 0 0 0 .5 0"/></filter>
+  <path id="pet" d="M0 0C-13 -8 -18 -26 0 -36C18 -26 13 -8 0 0Z"/>
+  <radialGradient id="sealg" cx="36%" cy="30%" r="80%"><stop offset="0" stop-color="#ecd08a"/><stop offset=".5" stop-color="#c49a4c"/><stop offset="1" stop-color="#7a5622"/></radialGradient>
+  <filter id="sealw" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".05" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="9"/></filter>
+  <filter id="sealgr"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" result="t"/><feColorMatrix in="t" type="matrix" values="0 0 0 0 .25 0 0 0 0 .15 0 0 0 0 0 0 0 0 .25 0"/><feComposite in2="SourceGraphic" operator="in"/></filter>
+</defs></svg>
+
+<div id="app" style="--photo:url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wgARCANMAYYDASIAAhEBAxEB/8QAHQAAAgEFAQEAAAAAAAAAAAAAAAECAwQFBggHCf/EABoBAAMBAQEBAAAAAAAAAAAAAAABAgMEBQb/2gAMAwEAAhADEAAAAei2jl2YmDIsGCAcQJRaAEAAkSiIGIAaQ2k0hANRcU3BxAlFyyMkxIQAhUCEEXAbIsASFKLiMIgZkktsRMBiYCYCYgaEAMBJoBNADSEMGgBCENRcZZEEEk20hSKLSaTQ5RECTQ0xAJoCMooiAjOgdGKGgTQDAABAAwQ0AgBAAhgCcQE0hNA1GSkgpoaAQoyiODFLQMENNpMTUZRAQgcWkIBPOKS6cEpIBMQAgYmANAJoEAAgBpgKMkCTAiwQkwcBiEpIcYziEU4yKLapJoAAIpxTECYmgQDM6B0YgCENISwmRbATEgTAiNAJoAGCUkCABAAlJBFSihJoZFwlxGIiNAkCYMCKkhxCQQGk4jE84g6cQEDFIEwCLaBKSREIokhAAwHFgAgE0AmMQ0iKnEIxYnGM4Dim5IqUQTBCBAREOSEhoGRAms4NdGSTQKYwE0JDQ0mgQEiAATQKSbAGCABJgJACjY+eo9Qj4dlQ9bjo28jQNECQEVKKIxlCXEYmDdKKlBNAS86SXRmhoBgA0xJCGQaQAkIAJAACbABCBANeUBeea+XWo8nhLO4vOzus5jKmW2+e2U33/e829JxcUJIi4jUZNEVJIQ4jUZRQgE8+M6MkDCJJDQ0mRaAi0EVJIBSAAATQDIgO2uQtuSet+Y870fD++71l0c5a777z5pjZYyVp0c4lGpuu6+DOrIv2QkoqACYmhYKpmEWpFFxVAwM8w3zTBAmgEARGlRGSCI0DEwSkgNL0rl4Xsfk+NyFxYbBLCzXWO+cBdJZ7e329KWHZqXNXUPkeT8Qp5TYe/ztFtux+fMerz3pfmfpnfj96i4xSQAIAEAKMopoGCGJ50ZtmgYJNAKUQiMTipCIkkNIANdz/NznyO2y1Lo58T6/oPWnH3YrWN61zx/V8O8i6n5z7OXoTZdfyJtsNfN4HLXwT0PJwzDyX23yKtvGet+TuyPW+e31NJoYhJoBCBRYMGAgBZ4ZpCGgSlEYmBEYhAAJxVIYGo8t9HcuXla22MqaR0t6zQhx+h5ZTWQ4O7T9C948Ob9yzvjW4G/qWq31vOWDwez6RjaucTtc66D735Vlujk9mVKr6fkpoBKQEIyiCYA4iCREDYQWkMASjKIwEMEwEAJNJgCeucWdF8xufbquO6A4PTydalPfn053GM4fQynkexaHGnjvQPiXR3pebk6uPw3n9V1pLz6VxmLwy6Nfz2S3vq59TreYeAen5HeZ5j6crSaRFMBJoEmgAA2AC4aaBAAgQxAAhJiYmYnLYkONtF23XrhdLcub3GnXOwaVsPF20NW2irlr5ZoXsng0b+N+lec+3ex4Pp2T9D03He91LzX01Vlsx4V5ROvfdLXY9nByLo05VJnsPWF7h7DxfCatv8AGiLbgw0NsgG6kC8rEaHhfnHsfj2vL21qWnLsOvhw9pNY/PeNOWyuLYNQkl85k3LhC0lSpSEp45a66a1aX63q1876vN6eaykfdvG/fPHfePDfYfB9f430Pzv0Dy72jzX0jzr2rwf3fxX2LzP0Dy32rwf3vxH3fwe3zP0Ty32rxL3vxP3vxW2lri0Veq1aT/2Q==)">
+<audio id="music" loop preload="auto"></audio>
+<button class="snd" id="snd" type="button" aria-label="Som ligado ou desligado"><svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9z"/><path class="w" d="M16.5 9a4 4 0 010 6M19 6.5a8 8 0 010 11"/><path class="x" d="M17 9l5 6M22 9l-5 6"/></svg></button>
+<div id="petals" aria-hidden="true"></div>
+
+<main id="page">
+  <header class="hero">
+    <p class="eb cap rv">Com amor, convidamos-te para o casamento de</p>
+    <div class="archw rv">
+      <div class="arch"><div class="ph"></div><video id="vid" muted loop playsinline preload="auto" hidden></video></div>
+      <svg class="gl" viewBox="-190 -60 380 140" aria-hidden="true"><use href="#garland"/></svg>
+    </div>
+    <h1 class="nm rv"><span data-t="a"></span><span class="amp">&amp;</span><span data-t="b"></span></h1>
+    <p class="dt cap rv" data-t="dateShort"></p>
+    <svg class="orn rv" viewBox="0 0 220 24" aria-hidden="true"><use href="#divider"/></svg>
+    <button class="cue rv" id="cue" type="button" aria-label="Ver mais"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+  </header>
+
+  <section class="sec">
+    <svg class="dv rv" viewBox="0 0 220 24" aria-hidden="true"><use href="#divider"/></svg>
+    <p class="lb cap rv">Com a bênção de Deus</p>
+    <p class="big rv" data-t="invite"></p>
+    <p class="rv" data-t="dateLong"></p>
+    <div class="cd rv" id="cd"></div>
+  </section>
+
+  <section class="sec">
+    <svg class="dv rv" viewBox="0 0 220 24" aria-hidden="true"><use href="#divider"/></svg>
+    <p class="lb cap rv">Os noivos</p>
+    <h2 class="rv">O nosso amor</h2>
+    <div class="gal" id="gal"></div>
+  </section>
+
+  <section class="sec">
+    <svg class="dv rv" viewBox="0 0 220 24" aria-hidden="true"><use href="#divider"/></svg>
+    <p class="lb cap rv">Programa</p>
+    <h2 class="rv">O grande dia</h2>
+    <ol class="tl rv" id="tl"></ol>
+    <p class="sub rv" data-t="dress"></p>
+  </section>
+
+  <section class="sec">
+    <svg class="dv rv" viewBox="0 0 220 24" aria-hidden="true"><use href="#divider"/></svg>
+    <p class="lb cap rv">Local</p>
+    <h2 class="venue rv" data-t="venue"></h2>
+    <p class="rv" data-t="address"></p>
+    <div class="row3 rv"><a class="btn fill" id="mGoogle" target="_blank" rel="noopener">Google</a><a class="btn" id="mApple" target="_blank" rel="noopener">Apple</a><a class="btn" id="mWaze" target="_blank" rel="noopener">Waze</a></div>
+    <p class="sub rv">Guarda a data</p>
+    <div class="row2 rv"><a class="btn" id="cGoogle" target="_blank" rel="noopener">Google Calendar</a><a class="btn" id="cOutlook" target="_blank" rel="noopener">Outlook</a></div>
+  </section>
+
+  <section class="sec">
+    <svg class="dv rv" viewBox="0 0 220 24" aria-hidden="true"><use href="#divider"/></svg>
+    <p class="lb cap rv">Presença</p>
+    <h2 class="rv">Vens connosco?</h2>
+    <p class="rv" data-t="rsvpBy"></p>
+    <div class="form rv">
+      <label><span class="cap">O teu nome</span><input id="fName" autocomplete="name" placeholder="Nome completo"></label>
+      <div class="ch"><button class="btn" type="button" data-v="yes">Vou com gosto</button><button class="btn" type="button" data-v="no">Não poderei</button></div>
+      <label><span class="cap">Pessoas</span><select id="fGuests"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></label>
+      <label><span class="cap">Mensagem</span><textarea id="fMsg" placeholder="Uma palavra para os noivos (opcional)"></textarea></label>
+      <button class="btn fill" id="sendWa" type="button">Confirmar por WhatsApp</button>
+      <button class="btn" id="sendMail" type="button">Enviar por e-mail</button>
+      <p class="note" id="note" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <footer class="sec">
+    <svg class="gl2 rv" viewBox="-190 -60 380 140" aria-hidden="true"><use href="#garland"/></svg>
+    <p class="lb cap rv">Com todo o nosso amor</p>
+    <h2 class="nm rv"><span data-t="a"></span><span class="amp">&amp;</span><span data-t="b"></span></h2>
+    <button class="replay rv" id="replay" type="button">Fechar as portas</button>
+  </footer>
+</main>
+
+<div class="lightbox" id="lbx" hidden role="dialog" aria-label="Fotos"><button class="lbtn x" id="lbClose" type="button" aria-label="Fechar">×</button><button class="lbtn pv" id="lbPrev" type="button" aria-label="Anterior">‹</button><img id="lbImg" alt=""><button class="lbtn nx" id="lbNext" type="button" aria-label="Seguinte">›</button></div>
+
+<div id="cover" aria-label="Convite">
+  <div class="glow"></div>
+  <div class="door l"><svg viewBox="0 0 400 844" preserveAspectRatio="xMidYMid slice"><use href="#art"/></svg></div>
+  <div class="door r"><svg viewBox="0 0 400 844" preserveAspectRatio="xMidYMid slice"><use href="#art"/></svg></div>
+  <div class="ct"><p class="cap">Convite de casamento</p><h1 class="nm"><span data-t="a"></span><span class="amp">&amp;</span><span data-t="b"></span></h1><p class="dt cap" data-t="dateShort"></p></div>
+  <button class="seal" id="open" type="button" aria-label="Quebrar o selo e abrir o convite"><span class="sh l"><svg viewBox="0 0 120 120" aria-hidden="true"><g filter="url(#sealw)"><circle cx="60" cy="60" r="50" fill="url(#sealg)"/></g><circle cx="60" cy="60" r="38" fill="#c49a4c" stroke="#7a5622" stroke-width="2"/><circle cx="60" cy="60" r="36.4" fill="none" stroke="#f0d79c" stroke-opacity=".55"/><circle cx="60" cy="60" r="49" fill="#000" filter="url(#sealgr)"/><text class="sealTxt" x="60" y="75" text-anchor="middle" font-family="Great Vibes,Snell Roundhand,cursive" font-size="44" fill="#a67a2c" stroke="#f0d79c" stroke-opacity=".6" stroke-width=".7"></text></svg></span><span class="sh r"><svg viewBox="0 0 120 120" aria-hidden="true"><g filter="url(#sealw)"><circle cx="60" cy="60" r="50" fill="url(#sealg)"/></g><circle cx="60" cy="60" r="38" fill="#c49a4c" stroke="#7a5622" stroke-width="2"/><circle cx="60" cy="60" r="36.4" fill="none" stroke="#f0d79c" stroke-opacity=".55"/><circle cx="60" cy="60" r="49" fill="#000" filter="url(#sealgr)"/><text class="sealTxt" x="60" y="75" text-anchor="middle" font-family="Great Vibes,Snell Roundhand,cursive" font-size="44" fill="#a67a2c" stroke="#f0d79c" stroke-opacity=".6" stroke-width=".7"></text></svg></span></button>
+</div>
+</div>
+
+<script>
+// ---------- desenhos (flores, folhas, portas) ----------
+(function () {
+  var f = function (n) { return n.toFixed(1); };
+  var peony = "";
+  [[9, 1, 0, "#f6dcd5"], [7, .72, 20, "#ecbcb4"], [5, .46, 0, "#dea199"]].forEach(function (L) {
+    for (var i = 0; i < L[0]; i++) peony += '<use href="#pet" transform="rotate(' + f(L[2] + i * 360 / L[0]) + ') scale(' + L[1] + ')" fill="' + L[3] + '" stroke="rgba(176,112,106,.4)" stroke-width=".7"/>';
+  });
+  peony += '<circle r="3.2" fill="#c8a45d"/><circle cx="1.5" cy="-1.5" r="1.2" fill="#e8cf8f"/>';
+  var euc = '<path d="M0 0C40 -4 90 6 150 36" fill="none" stroke="#7d8f74" stroke-width="1.4"/>';
+  function B(t) { var u = 1 - t; return [u*u*u*0 + 3*u*u*t*40 + 3*u*t*t*90 + t*t*t*150, 3*u*u*t*-4 + 3*u*t*t*6 + t*t*t*36]; }
+  for (var i = 1; i <= 10; i++) {
+    var t = i / 10, p = B(t), q = B(t + .02), a = Math.atan2(q[1] - p[1], q[0] - p[0]) * 180 / Math.PI, s = i % 2 ? 1 : -1, r = 13 - i * .6;
+    euc += '<ellipse cx="' + f(p[0]) + '" cy="' + f(p[1] + s * 7) + '" rx="' + f(r) + '" ry="' + f(r * .7) + '" transform="rotate(' + f(a + s * 38) + ' ' + f(p[0]) + ' ' + f(p[1] + s * 7) + ')" fill="' + (i % 3 ? "#a3b99e" : "#87a083") + '" stroke="#6f8a6b" stroke-width=".5" opacity=".92"/>';
+  }
+  euc += '<ellipse cx="152" cy="38" rx="9" ry="6" transform="rotate(60 152 38)" fill="#87a083"/>';
+  var garland =
+    '<use href="#euc" transform="scale(-1 1) translate(4 0)"/><use href="#euc" transform="translate(4 0)"/>' +
+    '<use href="#euc" transform="scale(-1 1) translate(4 -4) rotate(-22) scale(.8)"/><use href="#euc" transform="translate(4 -4) rotate(-22) scale(.8)"/>' +
+    '<use href="#peony" transform="translate(-50 10) scale(.8)"/><use href="#peony" transform="translate(52 12) scale(.85)"/>' +
+    '<use href="#peony" transform="translate(0 -4) scale(1.15)"/>' +
+    '<use href="#peony" transform="translate(-92 26) scale(.4)"/><use href="#peony" transform="translate(96 28) scale(.42)"/>';
+  var art =
+    '<rect width="400" height="844" fill="url(#ivg)"/><rect width="400" height="844" filter="url(#lin)" opacity=".07"/>' +
+    '<g fill="none" stroke="#c8a45d"><path d="M30 800V330A170 170 0 0 1 370 330V800" stroke-width="1.4"/><path d="M46 800V332A154 154 0 0 1 354 332V800" stroke-width=".7" opacity=".75"/><path d="M30 800H370" stroke-width="1.2"/></g>' +
+    '<line x1="200" y1="0" x2="200" y2="844" stroke="#d8c9ae" stroke-width="1"/>' +
+    '<use href="#euc" transform="translate(36 792) rotate(-84) scale(1.35)"/><use href="#euc" transform="translate(364 792) scale(-1 1) rotate(-84) scale(1.35)"/>' +
+    '<use href="#peony" transform="translate(40 790) scale(.8)"/><use href="#peony" transform="translate(360 790) scale(.8)"/>' +
+    '<use href="#garland" transform="translate(200 172) scale(1.18)"/>';
+  var divider = '<path d="M8 12H86M134 12H212" stroke="#b08d4c" stroke-width=".9" fill="none"/><path d="M92 12c6-9 14-9 18 0c4-9 12-9 18 0" fill="none" stroke="#c98f89" stroke-width="1.2"/><ellipse cx="100" cy="6" rx="6" ry="2.6" fill="#a3b99e" transform="rotate(-28 100 6)"/><ellipse cx="120" cy="6" rx="6" ry="2.6" fill="#a3b99e" transform="rotate(28 120 6)"/><ellipse cx="110" cy="19" rx="3" ry="3" fill="#b08d4c"/>';
+  document.getElementById("defs").insertAdjacentHTML("beforeend",
+    '<g id="peony">' + peony + '</g><g id="euc">' + euc + '</g><g id="garland">' + garland + '</g><g id="art">' + art + '</g><g id="divider">' + divider + '</g>');
+})();
+
+// ============ EDITA AQUI ============
+var CFG = {
+  a: "Juliette", b: "James",
+  start: "2027-06-12T15:00:00+02:00", durationH: 9,   // fuso de Maputo: +02:00
+  dateShort: "12 · 06 · 2027",
+  dateLong: "Sábado, 12 de junho de 2027",
+  invite: "Juliette e James têm a alegria de te convidar para celebrar o seu casamento.",
+  venue: "Nome do local", address: "Rua, cidade, país",
+  dress: "Traje: gala",
+  monogram: "",   // iniciais no selo (vazio = iniciais dos nomes), ex.: "J&J"
+  rsvpBy: "Pedimos que confirmes até 12 de maio de 2027.",
+  whatsapp: "258840000000", email: "casamento@exemplo.com",
+  schedule: [["15:00","Cerimónia","Chegada dos convidados às 14:30"],["17:00","Cocktail","Jardim do local"],["19:00","Jantar",""],["21:30","Festa","Até ao amanhecer"]],
+  video: "",    // vídeo dentro do arco da capa, ex.: "capa.mp4" ou um URL
+  music: "",    // música, ex.: "musica.mp3" ou um URL
+  photos: []    // fotos do casal, ex.: ["fotos/1.jpg", "fotos/2.jpg", "fotos/3.jpg", "fotos/4.jpg"]
+};
+var $ = function (id) { return document.getElementById(id); };
+var app = $("app"), page = $("page"), cover = $("cover");
+
+document.title = CFG.a + " & " + CFG.b;
+var mono = (CFG.monogram || (CFG.a.charAt(0) + CFG.b.charAt(0))).toUpperCase();
+document.querySelectorAll(".sealTxt").forEach(function (t) { t.textContent = mono; });
+document.querySelectorAll("[data-t]").forEach(function (el) { el.textContent = CFG[el.dataset.t]; });
+$("tl").innerHTML = CFG.schedule.map(function (r) {
+  return "<li><time>" + r[0] + "</time><strong>" + r[1] + "</strong>" + (r[2] ? "<small>" + r[2] + "</small>" : "") + "</li>";
+}).join("");
+
+// Pétalas
+var pet = "";
+for (var i = 0; i < 16; i++) {
+  pet += '<i class="pt" style="--x:' + Math.round(Math.random() * 100) + '%;--s:' + (9 + Math.round(Math.random() * 9)) + 'px;--d:' + (10 + Math.round(Math.random() * 8)) + 's;--dl:-' + Math.round(Math.random() * 14) + 's;--dx:' + (Math.round(Math.random() * 120) - 60) + 'px;--r:' + (Math.round(Math.random() * 600) - 300) + 'deg"></i>';
+}
+$("petals").innerHTML = pet;
+
+// Vídeo e música
+var vid = $("vid"), mus = $("music"), snd = $("snd");
+function startMedia() {
+  if (vid.src) vid.play().catch(function () {});
+  if (mus.src) {
+    mus.volume = 0; mus.play().catch(function () {});
+    var v = 0, t = setInterval(function () { v = Math.min(0.7, v + 0.05); mus.volume = v; if (v >= 0.7) clearInterval(t); }, 120);
+  }
+}
+if (CFG.video) { vid.src = CFG.video; vid.hidden = false; vid.addEventListener("canplay", function () { vid.classList.add("on"); }, { once: true }); }
+if (CFG.music) { mus.src = CFG.music; snd.classList.add("show"); }
+snd.addEventListener("click", function () { mus.muted = !mus.muted; snd.classList.toggle("off", mus.muted); });
+
+// Portas + auto-scroll corrigido
+var closeT, autoScrollFrame = null, autoScrollLast = 0;
+var previousScrollBehavior = "";
+
+function stopAutoScroll() {
+  if (autoScrollFrame !== null) {
+    cancelAnimationFrame(autoScrollFrame);
+    autoScrollFrame = null;
+  }
+  autoScrollLast = 0;
+  if (page.dataset.autoScrollActive === "true") {
+    page.style.scrollBehavior = previousScrollBehavior;
+    delete page.dataset.autoScrollActive;
+  }
+}
+
+function startAutoScroll() {
+  stopAutoScroll();
+
+  previousScrollBehavior = page.style.scrollBehavior;
+  page.style.scrollBehavior = "auto";
+  page.dataset.autoScrollActive = "true";
+
+  var speed = 18; // pixels por segundo
+  function step(now) {
+    if (!app.classList.contains("opened") || !cover.classList.contains("gone")) {
+      autoScrollFrame = requestAnimationFrame(step);
+      return;
+    }
+
+    if (!autoScrollLast) autoScrollLast = now;
+    var elapsed = Math.min((now - autoScrollLast) / 1000, 0.05);
+    autoScrollLast = now;
+
+    if (!lbxIsOpen()) {
+      var maxScroll = page.scrollHeight - page.clientHeight;
+      if (maxScroll > 2 && page.scrollTop < maxScroll - 2) {
+        page.scrollTop = Math.min(maxScroll, page.scrollTop + speed * elapsed);
+        autoScrollFrame = requestAnimationFrame(step);
+      } else {
+        stopAutoScroll();
+      }
+    } else {
+      autoScrollFrame = requestAnimationFrame(step);
+    }
+  }
+
+  setTimeout(function () {
+    page.scrollTop = 0;
+    autoScrollFrame = requestAnimationFrame(step);
+  }, 200);
+}
+
+function lbxIsOpen() {
+  var box = $("lbx");
+  return box && !box.hidden;
+}
+
+// Interromper o auto-scroll assim que o utilizador rolar manualmente ou usar o rato/toque
+["wheel", "touchmove", "pointerdown", "keydown"].forEach(function (eventName) {
+  page.addEventListener(eventName, function() {
+    if (page.dataset.autoScrollActive === "true") {
+      stopAutoScroll();
+    }
+  }, { passive: true });
+});
+
+function openDoors() {
+  if (cover.classList.contains("open")) return;
+  clearTimeout(closeT);
+  cover.classList.remove("gone");
+  cover.classList.add("open");
+  app.classList.add("opened");
+  startMedia();
+
+  closeT = setTimeout(function () {
+    cover.classList.add("gone");
+    startAutoScroll();
+  }, 3400);
+}
+cover.addEventListener("click", openDoors);
+$("replay").addEventListener("click", function () {
+  stopAutoScroll();
+  page.style.scrollBehavior = "auto"; page.scrollTop = 0; page.style.scrollBehavior = "";
+  cover.classList.remove("gone"); void cover.offsetWidth;
+  cover.classList.remove("open"); app.classList.remove("opened");
+  try { mus.pause(); vid.pause(); } catch (err) {}
+});
+$("cue").addEventListener("click", function () {
+  stopAutoScroll();
+  page.scrollTo({ top: page.clientHeight * 0.92, behavior: "smooth" });
+});
+
+// Galeria
+var PH = CFG.photos || [], gal = $("gal"), cur = 0, lbx = $("lbx");
+if (PH.length) {
+  PH.forEach(function (src, i) {
+    var b = document.createElement("button"); b.type = "button"; b.setAttribute("aria-label", "Ver foto " + (i + 1));
+    var im = document.createElement("img"); im.src = src; im.alt = ""; im.loading = "lazy"; b.appendChild(im);
+    b.addEventListener("click", function () { showLb(i); }); gal.appendChild(b);
+  });
+} else {   // modelo: recortes da foto da capa, só para veres as molduras
+  [["50% 18%", "cover"], ["52% 14%", "300%"], ["60% 58%", "280%"], ["50% 40%", "cover"]].forEach(function (c) {
+    var b = document.createElement("button"); b.type = "button"; b.className = "dflt"; b.tabIndex = -1;
+    b.innerHTML = '<div class="ph" style="background-position:' + c[0] + ';background-size:' + c[1] + '"></div>'; gal.appendChild(b);
+  });
+}
+function showLb(i) {
+  cur = (i + PH.length) % PH.length; $("lbImg").src = PH[cur];
+  $("lbPrev").hidden = $("lbNext").hidden = PH.length < 2;
+  lbx.hidden = false; requestAnimationFrame(function () { lbx.classList.add("on"); });
+}
+function hideLb() { lbx.classList.remove("on"); setTimeout(function () { lbx.hidden = true; }, 350); }
+$("lbClose").addEventListener("click", hideLb);
+$("lbPrev").addEventListener("click", function (e) { e.stopPropagation(); showLb(cur - 1); });
+$("lbNext").addEventListener("click", function (e) { e.stopPropagation(); showLb(cur + 1); });
+lbx.addEventListener("click", function (e) { if (e.target === lbx) hideLb(); });
+var sx = null;
+lbx.addEventListener("pointerdown", function (e) { sx = e.clientX; });
+lbx.addEventListener("pointerup", function (e) { if (sx === null) return; var d = e.clientX - sx; sx = null; if (Math.abs(d) > 50) showLb(cur + (d < 0 ? 1 : -1)); });
+document.addEventListener("keydown", function (e) {
+  if (lbx.hidden) return;
+  if (e.key === "Escape") hideLb(); if (e.key === "ArrowRight") showLb(cur + 1); if (e.key === "ArrowLeft") showLb(cur - 1);
+});
+
+// Entrada ao rolar
+document.querySelectorAll(".hero .rv").forEach(function (el, i) { el.style.setProperty("--i", i); });
+document.querySelectorAll(".sec").forEach(function (s) { s.querySelectorAll(".rv").forEach(function (el, i) { el.style.setProperty("--i", i); }); });
+var targets = document.querySelectorAll(".sec,.gal button");
+if ("IntersectionObserver" in window) {
+  var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }); }, { root: page, threshold: 0.12 });
+  targets.forEach(function (t) { io.observe(t); });
+} else { targets.forEach(function (t) { t.classList.add("in"); }); }
+
+// Contagem
+var units = ["dias", "horas", "min", "seg"];
+$("cd").innerHTML = units.map(function (u, i) { return '<div><b id="c' + i + '">0</b><span class="cap">' + u + '</span></div>'; }).join("");
+var target = new Date(CFG.start).getTime();
+function tick() {
+  var d = Math.max(0, target - Date.now());
+  [Math.floor(d / 864e5), Math.floor(d % 864e5 / 36e5), Math.floor(d % 36e5 / 6e4), Math.floor(d % 6e4 / 1e3)].forEach(function (n, i) { $("c" + i).textContent = n; });
+}
+tick(); setInterval(tick, 1000);
+
+// Mapas e calendário
+var q = encodeURIComponent(CFG.venue + ", " + CFG.address);
+$("mGoogle").href = "[https://www.google.com/maps/search/?api=1&query=](https://www.google.com/maps/search/?api=1&query=)" + q;
+$("mApple").href = "[https://maps.apple.com/?q=](https://maps.apple.com/?q=)" + q;
+$("mWaze").href = "[https://waze.com/ul?q=](https://waze.com/ul?q=)" + q + "&navigate=yes";
+var s0 = new Date(CFG.start), e0 = new Date(s0.getTime() + CFG.durationH * 36e5);
+var fmt = function (d) { return d.toISOString().replace(/[-:]|\.\d{3}/g, ""); };
+var ttl = encodeURIComponent("Casamento " + CFG.a + " & " + CFG.b);
+$("cGoogle").href = "[https://calendar.google.com/calendar/render?action=TEMPLATE&text=](https://calendar.google.com/calendar/render?action=TEMPLATE&text=)" + ttl + "&dates=" + fmt(s0) + "/" + fmt(e0) + "&location=" + q;
+$("cOutlook").href = "[https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&subject=](https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&subject=)" + ttl + "&startdt=" + encodeURIComponent(s0.toISOString()) + "&enddt=" + encodeURIComponent(e0.toISOString()) + "&location=" + q;
+
+// Presença
+var answer = "";
+document.querySelectorAll(".ch .btn").forEach(function (b) {
+  b.addEventListener("click", function () {
+    answer = b.dataset.v;
+    document.querySelectorAll(".ch .btn").forEach(function (x) { x.classList.toggle("on", x === b); });
+  });
+});
+function rsvpText() {
+  var name = $("fName").value.trim();
+  if (!name || !answer) { $("note").textContent = "Indica o teu nome e se podes vir."; return null; }
+  $("note").textContent = "";
+  var t = "Olá! Sou " + name + ". " + (answer === "yes" ? "Confirmo a minha presença no casamento de " + CFG.a + " e " + CFG.b + " (" + $("fGuests").value + " pessoa(s))." : "Infelizmente não poderei estar no casamento de " + CFG.a + " e " + CFG.b + ".");
+  var m = $("fMsg").value.trim();
+  return m ? t + " " + m : t;
+}
+$("sendWa").addEventListener("click", function () {
+  var t = rsvpText(); if (t) window.open("[https://wa.me/](https://wa.me/)" + CFG.whatsapp + "?text=" + encodeURIComponent(t), "_blank", "noopener");
+});
+$("sendMail").addEventListener("click", function () {
+  var t = rsvpText(); if (t) window.location.href = "mailto:" + CFG.email + "?subject=" + encodeURIComponent("Presença · " + CFG.a + " & " + CFG.b) + "&body=" + encodeURIComponent(t);
+});
+</script>
+</body>
+</html>
